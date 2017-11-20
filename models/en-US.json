@@ -1,7 +1,7 @@
 {
     "interactionModel":{
         "languageModel":{
-            "invocationName":"hello world",
+            "invocationName":"my photon",
             "types":[],
             "intents":[
                 {
@@ -17,28 +17,25 @@
                   "samples": []
                 },
                 {
-                    "name":"HelloWorldIntent",
+                    "name":"TurnOnIntent",
                     "slots":[
 
                     ],
                     "samples":[
-                        "hello",
-                        "say hello",
-                        "say hello world"
+                        "turn on",
+                        "turn light on",
+                        "light on"
                     ]
                 },
                 {
-                    "name":"MyNameIsIntent",
+                    "name":"TurnOffIntent",
                     "slots":[
-                        {
-                            "name":"name",
-                            "type":"AMAZON.US_FIRST_NAME"
-                        }
+
                     ],
                     "samples":[
-                        "my name is {name}",
-                        "i am {name}",
-                        "you can call me {name}"
+                        "turn off",
+                        "turn light off",
+                        "light off"
                     ]
                 }
             ]
