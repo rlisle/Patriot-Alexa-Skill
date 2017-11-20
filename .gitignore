@@ -1,6 +1,9 @@
 # Node Modules
 node_modules
 
+# ASK config (since everyone's skill_id will be different)
+.ask/config
+
 # WebStorm
 .idea
 
