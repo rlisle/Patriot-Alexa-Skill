@@ -1,6 +1,7 @@
 'use strict';
 const Alexa = require("alexa-sdk");
 const Particle = require('particle-api-js');
+var particle = new Particle();
 
 const publishName = "patriot";
 //const deviceId = "<your photon device id>";
@@ -30,6 +31,7 @@ var handlers = {
     },
   'TurnOnIntent': function () {
       log('Turn On', 'Turn on intent calling publish');
+      log('event',this.event);
       let token = this.event.session.user.accessToken;
       publish(publishName, "blue:100", token);
     this.response.speak('Ok, the light is now on')
@@ -38,6 +40,7 @@ var handlers = {
   },
   'TurnOffIntent': function () {
     log('Turn Off', 'Turn off intent calling publish');
+    log('event',this.event);
     let token = this.event.session.user.accessToken;
     publish(publishName, "blue:0", token);
     this.response.speak('Ok, the light is now off')
@@ -68,6 +71,7 @@ var handlers = {
 function publish(name, data, token) {
   let args = { name: name, data: data, auth: token, isPrivate: true };
   return particle.publishEvent(args).then(function(response){
+    log("Particle Result",response);
     let result = response.body.ok;
     return result;
   });
