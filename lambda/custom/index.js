@@ -30,7 +30,7 @@ var handlers = {
     },
   'TurnOnIntent': function () {
       log('Turn On', 'Turn on intent calling publish');
-      let token = event.session.user.accessToken;
+      let token = this.event.session.user.accessToken;
       publish(publishName, "blue:100", token);
     this.response.speak('Ok, the light is now on')
       .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
@@ -38,7 +38,7 @@ var handlers = {
   },
   'TurnOffIntent': function () {
     log('Turn Off', 'Turn off intent calling publish');
-    let token = event.session.user.accessToken;
+    let token = this.event.session.user.accessToken;
     publish(publishName, "blue:0", token);
     this.response.speak('Ok, the light is now off')
       .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
