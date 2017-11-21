@@ -3,17 +3,12 @@ const Alexa = require("alexa-sdk");
 const Particle = require('particle-api-js');
 var particle = new Particle();
 
-const publishName = "patriot";
-//const deviceId = "<your photon device id>";
-var token;
-
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
 
-/* Helper methods */
 function log(title, msg) {
   console.log('**** ' + title + ': ' + JSON.stringify(msg) + '\n');
 }
@@ -30,22 +25,26 @@ var handlers = {
         this.emit(':responseReady');
     },
   'TurnOnIntent': function () {
-      log('Turn On', 'Turn on intent calling publish');
-      log('event',this.event);
-      let token = this.event.session.user.accessToken;
-      publish(publishName, "blue:100", token);
-    this.response.speak('Ok, the light is now on')
-      .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
-    this.emit(':responseReady');
+    log('Turn On', 'Turn on intent calling publish');
+    log('event', this.event);
+    let token = this.event.session.user.accessToken;
+    publish("ceiling:100", token).then(function (result) {
+
+      this.response.speak('Ok, the light is now on')
+        .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
+      this.emit(':responseReady');
+
+    })
   },
   'TurnOffIntent': function () {
     log('Turn Off', 'Turn off intent calling publish');
     log('event',this.event);
     let token = this.event.session.user.accessToken;
-    publish(publishName, "blue:0", token);
-    this.response.speak('Ok, the light is now off')
-      .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
-    this.emit(':responseReady');
+    publish("ceiling:0", token).then(function (result) {
+      this.response.speak('Ok, the light is now off')
+        .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
+      this.emit(':responseReady');
+    })
   },
     'SessionEndedRequest' : function() {
         console.log('Session ended with reason: ' + this.event.request.reason);
@@ -68,8 +67,8 @@ var handlers = {
     }
 };
 
-function publish(name, data, token) {
-  let args = { name: name, data: data, auth: token, isPrivate: true };
+function publish(data, token) {
+  let args = { name: "patriot", data: data, auth: token, isPrivate: true };
   return particle.publishEvent(args).then(function(response){
     log("Particle Result",response);
     let result = response.body.ok;
