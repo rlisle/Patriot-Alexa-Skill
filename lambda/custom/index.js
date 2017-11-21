@@ -1,9 +1,8 @@
 'use strict';
-var Alexa = require("alexa-sdk");
+const Alexa = require("alexa-sdk");
+const Particle = require('particle-api-js');
 
-// For detailed tutorial on how to making a Alexa skill,
-// please visit us at http://alexa.design/build
-
+const publishName = "patriot";
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
@@ -21,11 +20,13 @@ var handlers = {
         this.emit(':responseReady');
     },
   'TurnOnIntent': function () {
+      publish(publishName, "blue:100", token);
     this.response.speak('Ok, the light is now on')
       .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
     this.emit(':responseReady');
   },
   'TurnOffIntent': function () {
+    publish(publishName, "blue:100", token);
     this.response.speak('Ok, the light is now off')
       .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
     this.emit(':responseReady');
@@ -50,3 +51,11 @@ var handlers = {
             " or 'alexa, ask hello world my name is awesome Aaron'");
     }
 };
+
+function publish(name, data, token) {
+  let args = { name: name, data: data, auth: token, isPrivate: true };
+  return particle.publishEvent(args).then(function(response){
+    let result = response.body.ok;
+    return result;
+  });
+}
