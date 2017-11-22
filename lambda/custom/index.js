@@ -28,7 +28,7 @@ var handlers = {
     log('Turn On', 'Turn on intent calling publish');
     log('event', this.event);
     let token = this.event.session.user.accessToken;
-    publish("ceiling:100", token).then(function (result) {
+    publish("ceiling:100", token).then((result) => {
 
       log('Result', result);
       this.response.speak('Ok, the light is now on')
@@ -43,7 +43,7 @@ var handlers = {
     log('Turn Off', 'Turn off intent calling publish');
     log('event',this.event);
     let token = this.event.session.user.accessToken;
-    publish("ceiling:0", token).then(function (result) {
+    publish("ceiling:0", token).then((result) => {
       log('Result', result);
       this.response.speak('Ok, the light is now off')
         .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
