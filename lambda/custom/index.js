@@ -1,15 +1,15 @@
 'use strict';
 const Alexa = require("alexa-sdk");
 const Particle = require('particle-api-js');
-var particle = new Particle();
+const particle = new Particle();
 
 exports.handler = function(event, context) {
-    var alexa = Alexa.handler(event, context);
+    const alexa = Alexa.handler(event, context);
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
 
-var handlers = {
+const handlers = {
     'LaunchRequest': function () {
         this.emit('SayHello');
     },
@@ -59,5 +59,5 @@ var handlers = {
 function publish(data, token) {
   let args = { name: "patriot", data: data, auth: token, isPrivate: true };
   return particle.publishEvent(args)
-    .then((response) => response.body.ok;)
+    .then((response) => response.body.ok)
 }
