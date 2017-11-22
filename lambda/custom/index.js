@@ -30,10 +30,13 @@ var handlers = {
     let token = this.event.session.user.accessToken;
     publish("ceiling:100", token).then(function (result) {
 
+      log('Result', result);
       this.response.speak('Ok, the light is now on')
         .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
       this.emit(':responseReady');
 
+    }, function(error) {
+      log("Error",error);
     })
   },
   'TurnOffIntent': function () {
@@ -41,9 +44,12 @@ var handlers = {
     log('event',this.event);
     let token = this.event.session.user.accessToken;
     publish("ceiling:0", token).then(function (result) {
+      log('Result', result);
       this.response.speak('Ok, the light is now off')
         .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
       this.emit(':responseReady');
+    }, function(error) {
+      log("Error",error);
     })
   },
     'SessionEndedRequest' : function() {
