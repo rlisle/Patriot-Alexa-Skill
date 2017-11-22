@@ -9,13 +9,8 @@ exports.handler = function(event, context) {
     alexa.execute();
 };
 
-function log(title, msg) {
-  console.log('**** ' + title + ': ' + JSON.stringify(msg) + '\n');
-}
-
 var handlers = {
     'LaunchRequest': function () {
-      log('Launch', 'Saying hello');
         this.emit('SayHello');
     },
     'SayHello': function () {
@@ -25,31 +20,19 @@ var handlers = {
         this.emit(':responseReady');
     },
   'TurnOnIntent': function () {
-    log('Turn On', 'Turn on intent calling publish');
-    log('event', this.event);
     let token = this.event.session.user.accessToken;
-    publish("ceiling:100", token).then((result) => {
-
-      log('Result', result);
+    publish("blue:100", token).then((result) => {
       this.response.speak('Ok, the light is now on')
         .cardRenderer('Turn On', 'The Photon blue LED has been turned on');
       this.emit(':responseReady');
-
-    }, function(error) {
-      log("Error",error);
     })
   },
   'TurnOffIntent': function () {
-    log('Turn Off', 'Turn off intent calling publish');
-    log('event',this.event);
     let token = this.event.session.user.accessToken;
-    publish("ceiling:0", token).then((result) => {
-      log('Result', result);
+    publish("blue:0", token).then((result) => {
       this.response.speak('Ok, the light is now off')
         .cardRenderer('Turn Off', 'The Photon blue LED has been turned off');
       this.emit(':responseReady');
-    }, function(error) {
-      log("Error",error);
     })
   },
     'SessionEndedRequest' : function() {
@@ -75,9 +58,6 @@ var handlers = {
 
 function publish(data, token) {
   let args = { name: "patriot", data: data, auth: token, isPrivate: true };
-  return particle.publishEvent(args).then(function(response){
-    log("Particle Result",response);
-    let result = response.body.ok;
-    return result;
-  });
+  return particle.publishEvent(args)
+    .then((response) => response.body.ok;)
 }
