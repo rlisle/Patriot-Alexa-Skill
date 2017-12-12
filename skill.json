@@ -3,18 +3,18 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Sample Short Description",
+          "summary": "Patriot interactive voice skill",
           "examplePhrases": [
-            "Alexa open hello world",
-            "Alexa tell hello world I am Jeff",
-            "Alexa tell hello world my name is Peter"
+            "Alexa open patriot",
+            "Alexa tell patriot to start watching TV",
+            "Alexa tell patriot to turn on kitchen light when I am cooking dinner"
           ],
           "name": "Patriot",
-          "description": "Sample Full Description"
+          "description": "Interactively define and control Patriot IoT home devices using activity names"
         }
       },
       "isAvailableWorldwide": true,
-      "testingInstructions": "Sample Testing Instructions.",
+      "testingInstructions": "Create one or more Patriot IoT devices, then control it by saying Alexa, tell patriot to turn on my device when I am testing. Then tell Alexa to discover devices, followed by Alexa begin testing.",
       "category": "EDUCATION_AND_REFERENCE",
       "distributionCountries": []
     },

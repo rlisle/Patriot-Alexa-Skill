@@ -1,7 +1,7 @@
 {
-  "name": "skill-sample-nodejs-hello-world",
+  "name": "patriot-custom-skill",
   "version": "1.0.0",
-  "description": "Hello world sample skill",
+  "description": "Custom skill to control Patriot IoT devices",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

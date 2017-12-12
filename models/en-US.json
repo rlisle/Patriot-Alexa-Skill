@@ -1,41 +1,245 @@
 {
     "interactionModel":{
         "languageModel":{
-            "invocationName":"my photon",
-            "types":[],
-            "intents":[
+            "invocationName":"my lights",
+            "types": [
                 {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-                },
-                {
-                    "name":"TurnOnIntent",
-                    "slots":[
-
-                    ],
-                    "samples":[
-                        "turn on",
-                        "turn light on",
-                        "light on"
+                    "name": "ACTIVITY_LIST",
+                    "values": [
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "watching TV",
+                                "synonyms": ["watch TV", "watch some TV"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "washing dishes",
+                                "synonyms": ["wash dishes", "cleaning dishes", "clean dishes", "clean kitchen", "cleaning kitchen"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "cooking",
+                                "synonyms": ["cook", "prepare breakfast", "prepare lunch", "prepare dinner", "cook dinner"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "vacuuming",
+                                "synonyms": ["vacuum", "cleaning house", "clean house"]
+                            }
+                        }
                     ]
                 },
                 {
-                    "name":"TurnOffIntent",
+                    "name": "DEVICE_LIST",
+                    "values": [
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "kitchen",
+                                "synonyms": ["kitchen light"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "living room",
+                                "synonyms": ["living room lights"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "bathroom",
+                                "synonyms": ["bathroom lights"]
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "office",
+                                "synonyms": ["office lights"]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "START_STOP_LIST",
+                    "values": [
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "start",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "begin",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "commence",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "finish",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "stop",
+                                "synonyms": []
+                            }
+                        },
+                        {
+                            "id": null,
+                            "name": {
+                                "value": "end",
+                                "synonyms": []
+                            }
+                        }
+                    ]
+                }
+            ],
+            "intents":[
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name":"DoActivityIntent",
                     "slots":[
-
+                        {
+                            "name":"activity",
+                            "type":"ACTIVITY_LIST"
+                        },
+                        {
+                            "name":"startStop",
+                            "type":"START_STOP_LIST"
+                        }
                     ],
                     "samples":[
-                        "turn off",
-                        "turn light off",
-                        "light off"
+                        "{startStop} {activity}",
+                        "to {startStop} {activity}",
+                        "I am {startStop} {activity}",
+                        "I am {startStop} to {activity}",
+                        "I am going to {startStop} {activity}",
+                        "that I think I will {startStop} {activity}",
+                        "it is time to {startStop} {activity}",
+                        "I guess I better {startStop} {activity} now"
+                    ]
+                },
+                {
+                    "name":"DeviceOnIntent",
+                    "slots":[
+                        {
+                            "name":"activity",
+                            "type":"ACTIVITY_LIST"
+                        },
+                        {
+                            "name":"device",
+                            "type":"DEVICE_LIST"
+                        }
+                    ],
+                    "samples":[
+                        "when I am {activity} to turn on {device}",
+                        "when I say {activity} to turn on {device}",
+                        "that when I am {activity} to turn on {device}",
+                        "that when I say {activity} to turn on {device}",
+                        "that when {activity} turn on {device}",
+                        "enable {device} when {activity}",
+                        "to enable {device} when {activity}",
+                        "turn on {device} when {activity}",
+                        "to turn on {device} when {activity}",
+                        "to turn on {device} when I am {activity}",
+                        "to turn on {device} when I say {activity}"
+                    ]
+                },
+                {
+                    "name":"DeviceOffIntent",
+                    "slots":[
+                        {
+                            "name":"activity",
+                            "type":"ACTIVITY_LIST"
+                        },
+                        {
+                            "name":"device",
+                            "type":"DEVICE_LIST"
+                        }
+                    ],
+                    "samples":[
+                        "when I am {activity} to turn off {device}",
+                        "when I say {activity} to turn off {device}",
+                        "that when I am {activity} to turn off {device}",
+                        "that when I say {activity} to turn off {device}",
+                        "that when {activity} turn off {device}",
+                        "disable {device} when {activity}",
+                        "to disable {device} when I am {activity}",
+                        "to disable {device} when I say {activity}",
+                        "turn off {device} when {activity}",
+                        "to turn off {device} when {activity}",
+                        "to turn off {device} when I am {activity}",
+                        "to turn off {device} when I say {activity}"
+                    ]
+                },
+                {
+                    "name":"DevicePercentIntent",
+                    "slots":[
+                        {
+                            "name":"activity",
+                            "type":"ACTIVITY_LIST"
+                        },
+                        {
+                            "name":"device",
+                            "type":"DEVICE_LIST"
+                        },
+                        {
+                            "name":"percent",
+                            "type":"AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples":[
+                        "when I am {activity} to set {device} to {percent} percent",
+                        "that when I am {activity} to turn on {device} to {percent} percent",
+                        "that when {activity} set {device} to {percent} percent",
+                        "that when {activity} set {device} percentage to {percent}",
+                        "set {device} to {percent} percent when {activity}",
+                        "to set {device} to {percent} percent when {activity}",
+                        "to set {device} to {percent} percent when I am {activity}",
+                        "to set {device} to {percent} percent when I say {activity}",
+                        "to set {device} percentage to {percent} when I am {activity}"
                     ]
                 }
             ]
